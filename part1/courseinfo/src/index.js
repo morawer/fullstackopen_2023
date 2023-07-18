@@ -25,15 +25,16 @@ const Content = (props) => {
 	);
 };
 
-const Total = (proper) => { 
-  return (
+const Total = (proper) => {
+	return (
 		<>
 			<p>
-        Number of exercises { proper.exercises1 + proper.exercises2 + proper.exercises3 }
+				Number of exercises{" "}
+				{proper.exercises1 + proper.exercises2 + proper.exercises3}
 			</p>
 		</>
-  );
-}
+	);
+};
 
 const App = () => {
 	const course = "Half Stack application development";
@@ -55,7 +56,11 @@ const App = () => {
 				exercises2={exercises2}
 				exercises3={exercises3}
 			/>
-      <Total exercises1={ exercises1} exercises2={ exercises2} exercises3={ exercises3}/>
+			<Total
+				exercises1={exercises1}
+				exercises2={exercises2}
+				exercises3={exercises3}
+			/>
 		</div>
 	);
 };
