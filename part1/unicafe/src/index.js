@@ -20,20 +20,30 @@ const Button = (props) => {
 };
 
 const Statistics = (props) => {
-	return (
-		<div>
-			<h3>statistics</h3>
-			<FeedbackCounter text="good" value={props.good} />
-			<FeedbackCounter text="neutral" value={props.neutral} />
-			<FeedbackCounter text="bad" value={props.bad} />
-			<FeedbackCounter text="all" value={props.totalValue} />
-			<FeedbackCounter text="average" value={props.average} />
-			<FeedbackCounter
-				text="positive"
-				value={(props.good / props.totalValue) * 100}
-			/>
-		</div>
-	);
+	if (props.totalValue === 0) {
+		return (
+			<div>
+				<h3>statistics</h3>
+				<p>No feedback given</p>
+			</div>
+		);
+	} else {
+
+		return (
+			<div>
+				<h3>statistics</h3>
+				<FeedbackCounter text="good" value={props.good} />
+				<FeedbackCounter text="neutral" value={props.neutral} />
+				<FeedbackCounter text="bad" value={props.bad} />
+				<FeedbackCounter text="all" value={props.totalValue} />
+				<FeedbackCounter text="average" value={props.average} />
+				<FeedbackCounter
+					text="positive"
+					value={(props.good / props.totalValue) * 100}
+				/>
+			</div>
+		);
+	}
 };
 
 const FeedbackCounter = (props) => {
