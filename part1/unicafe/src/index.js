@@ -28,10 +28,10 @@ const Statistics = (props) => {
 			</div>
 		);
 	} else {
-
 		return (
 			<div>
 				<h3>statistics</h3>
+				<table>
 				<StatisticLine text="good" value={props.good} />
 				<StatisticLine text="neutral" value={props.neutral} />
 				<StatisticLine text="bad" value={props.bad} />
@@ -41,6 +41,7 @@ const Statistics = (props) => {
 					text="positive"
 					value={(props.good / props.totalValue) * 100}
 				/>
+				</table>
 			</div>
 		);
 	}
@@ -48,11 +49,12 @@ const Statistics = (props) => {
 
 const StatisticLine = (props) => {
 	return (
-		<div>
-			<p>
-				{props.text} {props.value}
-			</p>
-		</div>
+		<>
+			<tr>
+				<td>{props.text}</td>
+				<td>{props.value}{props.text === "positive" && " %"}</td>
+			</tr>
+		</>
 	);
 };
 
@@ -90,6 +92,7 @@ const App = () => {
 	return (
 		<div>
 			<Header title={"give your feedback"} />
+			
 			<Button feedback={() => giveFeedback("good")} text="GOOD" />
 			<Button feedback={() => giveFeedback("neutral")} text="NEUTRAL" />
 			<Button feedback={() => giveFeedback("bad")} text="BAD" />
