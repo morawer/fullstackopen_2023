@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 
-	let totalValue = 0;
-	let average = 0;
-	let avgArray = [];
-
+let totalValue = 0;
+let average = 0;
+let avgArray = [];
 
 const Header = (props) => (
 	<div>
@@ -24,6 +23,15 @@ const Statistics = (props) => {
 	return (
 		<div>
 			<h3>statistics</h3>
+			<FeedbackCounter text="good" value={props.good} />
+			<FeedbackCounter text="neutral" value={props.neutral} />
+			<FeedbackCounter text="bad" value={props.bad} />
+			<FeedbackCounter text="all" value={props.totalValue} />
+			<FeedbackCounter text="average" value={props.average} />
+			<FeedbackCounter
+				text="positive"
+				value={(props.good / props.totalValue) * 100}
+			/>
 		</div>
 	);
 };
@@ -39,24 +47,22 @@ const FeedbackCounter = (props) => {
 };
 
 const App = () => {
-
 	// save clicks of each button to its own state
 	const [good, setGood] = useState(0);
 	const [neutral, setNeutral] = useState(0);
 	const [bad, setBad] = useState(0);
 	let sum = 0;
-	
-	const giveAverage = (array) => array.forEach(element => {
-		sum += element;
-		console.log(array.length, "==>>", sum)
-		return (
-			average = sum / array.length
-		)
-	});
+
+	const giveAverage = (array) =>
+		array.forEach((element) => {
+			sum += element;
+			console.log(array.length, "==>>", sum);
+			return (average = sum / array.length);
+		});
 	const giveFeedback = (feedback) => {
 		if (feedback === "good") {
 			setGood(good + 1);
-			avgArray = avgArray.concat(1)
+			avgArray = avgArray.concat(1);
 		}
 		if (feedback === "neutral") {
 			setNeutral(neutral + 1);
@@ -67,8 +73,8 @@ const App = () => {
 			avgArray = avgArray.concat(-1);
 		}
 		totalValue += 1;
-		console.log(avgArray)
-		giveAverage(avgArray)
+		console.log(avgArray);
+		giveAverage(avgArray);
 	};
 
 	return (
@@ -77,13 +83,13 @@ const App = () => {
 			<Button feedback={() => giveFeedback("good")} text="GOOD" />
 			<Button feedback={() => giveFeedback("neutral")} text="NEUTRAL" />
 			<Button feedback={() => giveFeedback("bad")} text="BAD" />
-			<Statistics />
-			<FeedbackCounter text="good" value={good} />
-			<FeedbackCounter text="neutral" value={neutral} />
-			<FeedbackCounter text="bad" value={bad} />
-			<FeedbackCounter text="all" value={totalValue} />
-			<FeedbackCounter text="average" value={average} />
-			<FeedbackCounter text="positive" value={(good/totalValue)*100}/>
+			<Statistics
+				good={good}
+				neutral={neutral}
+				bad={bad}
+				totalValue={totalValue}
+				average={average}
+			/>
 		</div>
 	);
 };
