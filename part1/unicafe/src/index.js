@@ -32,12 +32,12 @@ const Statistics = (props) => {
 		return (
 			<div>
 				<h3>statistics</h3>
-				<FeedbackCounter text="good" value={props.good} />
-				<FeedbackCounter text="neutral" value={props.neutral} />
-				<FeedbackCounter text="bad" value={props.bad} />
-				<FeedbackCounter text="all" value={props.totalValue} />
-				<FeedbackCounter text="average" value={props.average} />
-				<FeedbackCounter
+				<StatisticLine text="good" value={props.good} />
+				<StatisticLine text="neutral" value={props.neutral} />
+				<StatisticLine text="bad" value={props.bad} />
+				<StatisticLine text="all" value={props.totalValue} />
+				<StatisticLine text="average" value={props.average} />
+				<StatisticLine
 					text="positive"
 					value={(props.good / props.totalValue) * 100}
 				/>
@@ -46,7 +46,7 @@ const Statistics = (props) => {
 	}
 };
 
-const FeedbackCounter = (props) => {
+const StatisticLine = (props) => {
 	return (
 		<div>
 			<p>
