@@ -8,50 +8,52 @@ const anecdotes = [
 	"Any fool can write code that a computer can understand. Good programmers write code that humans can understand.",
 	"Premature optimization is the root of all evil.",
 	"Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.",
-	"Holaaaa Dani!"
+	"Holaaaa Dani!",
 ];
 
 let anecdotePosition = 0;
 
-const votes = Array(anecdotes.length).fill(0);
-const votesCopy = [...votes]
+const votesWithZeros = Array(anecdotes.length).fill(0);
 
-
-const getRandomInt = (props) => { 
+const getRandomInt = (props) => {
 	anecdotePosition = Math.floor(Math.random() * props);
 	return anecdotePosition;
-}
-
+};
 
 const App = (props) => {
 	const [selected, setSelected] = useState(0);
-	const [votes, setVote] = useState([])
-	console.log(votesCopy);
-	
-	const addVote = (vote) => { 
-		setVote(...votesCopy, vote)
-	}
+	const [votes, setVote] = useState(votesWithZeros);
+	console.log(votes);
 
-  return (
+	const addVote = () => {
+		const updatedVote = [...votes];
+		updatedVote[selected] += 1;
+		setVote(updatedVote);
+	};
+
+	const getAnecdoteMostVoted = () => {
+		const maxVoted = Math.max(...votes);
+		const position = votes.indexOf(maxVoted);
+		console.log(maxVoted, position, ...votes);
+		return position;
+	};
+
+	return (
 		<div>
+			<h2>Anecdote of the day</h2>
 			<p>{props.anecdotes[selected]}</p>
-			<button
-				onClick={() =>
-				  addVote(votesCopy[anecdotePosition]+= 1)
-				}
-			>
-				vote
-			</button>
+			<button onClick={addVote}>vote</button>
 			<button
 				onClick={() =>
 					setSelected(() => getRandomInt(props.anecdotes.length))
 				}
 			>
 				next anecdote
-		  </button>
+			</button>
+			<h2>Anecdote with most votes</h2>
+			<p>{props.anecdotes[getAnecdoteMostVoted()]}</p>
 		</div>
-  );
+	);
 };
-
 
 ReactDOM.render(<App anecdotes={anecdotes} />, document.getElementById("root"));
