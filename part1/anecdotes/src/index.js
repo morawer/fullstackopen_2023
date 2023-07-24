@@ -42,6 +42,7 @@ const App = (props) => {
 		<div>
 			<h2>Anecdote of the day</h2>
 			<p>{props.anecdotes[selected]}</p>
+			<p>has {votes[selected]} votes </p>
 			<button onClick={addVote}>vote</button>
 			<button
 				onClick={() =>
@@ -52,6 +53,7 @@ const App = (props) => {
 			</button>
 			<h2>Anecdote with most votes</h2>
 			<p>{props.anecdotes[getAnecdoteMostVoted()]}</p>
+			<p>has {votes[getAnecdoteMostVoted()]} voted</p>
 		</div>
 	);
 };
