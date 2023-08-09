@@ -1,4 +1,5 @@
 const Total = ({ course }) => {
+	console.log(course[0].parts);
 	const totalExercises = course.parts.reduce(
 		(acc, part) => acc + part.exercises,
 		0
